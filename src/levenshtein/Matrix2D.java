@@ -62,7 +62,60 @@ class Matrix2D {
 	}
 
 
-
+	
+	// Instance Methods
+	
+	
+	// Adds another Matrix2D object to this instance.
+	// @param b: The Matrix2D object to add to this instance.
+	public void add(Matrix2D b) {
+		
+		int rows = b.getRowAmount();
+		int cols = b.getColAmount();
+		
+		for(int row = 0; row < rows; row++) {
+			for(int col = 0; col < cols; col++) {
+				setCellValue(row, col, getCell(row, col) + b.getCell(row, col));
+				cells[row][col] = cells[row][col] + b.cells[row][col];
+			}
+		}
+	}
+	
+	
+	
+	// Multiplies another Matrix2D object to this instance.
+	// @param b: The Matrix2D object to multiply to this instance.
+	public void mult(Matrix2D b) {
+		
+		int rows = b.getRowAmount();
+		int cols = b.getColAmount();
+		
+		for(int row = 0; row < rows; row++) {
+			for(int col = 0; col < cols; col++) {
+				
+				float sum = 0.0f;
+				
+				for(int i = 0; i < cols; i++) {
+					sum += getCell(row, i) * b.getCell(i, col);
+				}
+				setCellValue(row, col, sum);
+			}
+		}
+	}
+	
+	
+	
+	
+	// Identity Matrix representation of this instance. 
+	public void indentity() {
+		
+		for(int row = 0; row < rowAmount; row++) {
+			for(int col = 0; col < colAmount; col++) {
+				setCellValue(row, col, (row == col) ? 1 : 0);
+			}
+		}
+		
+	}
 	
 	
 	
