@@ -166,8 +166,8 @@ class Matrix2D {
 			for(int col = 0; col < colAmount; col++) {
 				returnString += getCell(row, col) + " ";
 			}
-			
+			returnString += "\n";
 		}
 		return returnString;
-	}	
+	}
 }
