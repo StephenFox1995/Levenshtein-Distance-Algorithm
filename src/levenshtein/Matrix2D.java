@@ -12,7 +12,7 @@ class Matrix2D {
 	public Matrix2D(int rows, int cols) {		
 		this.rowAmount = rows;
 		this.colAmount = cols;
-		this.cells = new float[rows][cols];
+		this.cells = new float[rowAmount][colAmount];
 	}
 
 
@@ -46,16 +46,21 @@ class Matrix2D {
 	// @return MAtrix2D: A new Matrix2D object with a and b added together.
 	public static Matrix2D mult(Matrix2D a, Matrix2D b) {
 		
-		int cols = a.getColAmount();
 		int rows = a.getRowAmount();
+		int cols = b.getColAmount();
 		
 		Matrix2D c = new Matrix2D(rows, cols);
 		
+		
 		for(int row = 0; row < rows; row++) {
 			for(int col = 0; col < cols; col++) {
-				c.setCellValue(row, col, 
-						a.getCell(row, col) * b.getCell(row, col));
 				
+				float sum = 0.0f;
+				
+				for(int i = 0; i < cols; col++) {
+					sum += a.getCell(row, i) * b.getCell(i, col);
+				}
+				c.setCellValue(row, col, sum);
 			}
 		}
 		return c;
@@ -150,4 +155,19 @@ class Matrix2D {
 		return cells[row][col];
 	}
 	
+	
+	
+	// @return Returns: A 'Matrix Style' representation the Matrix2D.
+	@Override
+	public String toString() {
+		String returnString = "";
+		
+		for(int row = 0; row < rowAmount; row++) {
+			for(int col = 0; col < colAmount; col++) {
+				returnString += getCell(row, col) + " ";
+			}
+			
+		}
+		return returnString;
+	}	
 }
